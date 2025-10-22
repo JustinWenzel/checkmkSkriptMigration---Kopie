@@ -1,0 +1,236 @@
+:root {
+  --cmk-green: #13d389;
+  --cmk-green-dark: #11bb7a;
+  --cmk-green-glow: rgba(19, 211, 137, 0.15);
+  --cmk-bg: #0f1114;
+  --cmk-card: rgba(42, 46, 52, 0.6);
+  --cmk-ink: #f0f3f7;
+  --cmk-muted: #9aa1a9;
+  --cmk-border: rgba(58, 64, 71, 0.4);
+}
+
+* { 
+  box-sizing: border-box; 
+  margin: 0;
+  padding: 0;
+}
+
+html, body { 
+  height: 100%; 
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
+  background: var(--cmk-bg);
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(19, 211, 137, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(19, 211, 137, 0.05) 0%, transparent 50%);
+  color: var(--cmk-ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  width: 92%;
+  max-width: 1200px;
+  margin: 48px auto;
+  padding: 0;
+  position: relative;
+}
+
+.logo-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 64px;
+}
+
+.logo-block img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+}
+
+section {
+  margin-bottom: 48px;
+  padding: 32px;
+  background: var(--cmk-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--cmk-border);
+  border-radius: 24px;
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+h2 {
+  margin: 0 0 28px;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--cmk-green);
+  position: relative;
+  padding-left: 16px;
+}
+
+h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 20px;
+  width: 3px;
+  background: var(--cmk-green);
+  border-radius: 2px;
+  box-shadow: 0 0 12px var(--cmk-green-glow);
+}
+
+.menu { 
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.menu li {
+  margin: 0;
+}
+
+.menu a {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: var(--cmk-ink);
+  background: rgba(34, 38, 43, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--cmk-border);
+  padding: 18px 20px;
+  border-radius: 16px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.menu a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(19, 211, 137, 0.05),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.menu a:hover::before {
+  left: 100%;
+}
+
+.menu a:hover {
+  background: rgba(47, 53, 60, 0.7);
+  border-color: var(--cmk-green);
+  transform: translateX(4px);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.4),
+    -4px 0 0 0 var(--cmk-green);
+}
+
+.menu a:active {
+  transform: translateX(2px);
+}
+
+.num {
+  min-width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--cmk-green) 0%, var(--cmk-green-dark) 100%);
+  color: #0a0c0e;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 
+    0 4px 12px rgba(19, 211, 137, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: box-shadow 0.25s ease;
+}
+
+.menu a:hover .num {
+  box-shadow: 
+    0 6px 16px rgba(19, 211, 137, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.title { 
+  flex: 1; 
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+}
+
+.menu a::after {
+  content: "→";
+  color: var(--cmk-muted);
+  font-size: 18px;
+  font-weight: 400;
+  transition: all 0.25s ease;
+  opacity: 0.6;
+}
+
+.menu a:hover::after {
+  color: var(--cmk-green);
+  transform: translateX(4px);
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 24px auto;
+  }
+  
+  section {
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
+  
+  .logo-block {
+    margin-bottom: 48px;
+  }
+  
+  .logo-block img {
+    max-width: 480px;
+    border-radius: 16px;
+  }
+  
+  .menu a {
+    padding: 16px 18px;
+  }
+}
+
+/* Keep menu links free of default underlines but provide a visible focus ring for keyboard users */
+.menu a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(19, 211, 137, 0.12);
+  border-radius: 12px;
+}

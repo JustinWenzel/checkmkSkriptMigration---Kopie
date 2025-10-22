@@ -1,0 +1,10 @@
+{
+    "vscode-pets.petColor": "black",
+    "vscode-pets.petSize": "medium",
+    "vscode-pets.theme": "forest",
+    "python.testing.pytestArgs": [
+        "."
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": false
+}

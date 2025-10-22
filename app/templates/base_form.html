@@ -1,0 +1,38 @@
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="/static/css/form.css">  
+      <title>
+          {% block title %}
+          {% endblock %}
+      </title>
+   </head>
+
+   <body>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-messages">
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      {% block content%}
+      {% endblock %}
+
+      <div class="back-to-menu">
+          <div class="button-group">
+              <div class="button-wrapper">
+                  <h6>Back to the menu?</h6>
+                  <a class="btn btn-sm btn-secondary" href="{{ url_for('auth.menu_page') }}">Menu</a>
+              </div>
+              {% block extra_buttons %}{% endblock %}
+          </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,27 @@
+{% extends 'base_form.html' %}
+
+
+{% block title %}
+  Delete Host
+{% endblock %}
+
+
+
+{% block content %}
+  <body>
+    <div class="container">
+
+      <form method="POST" class="form-addHost">
+         {{ form.hidden_tag() }}
+        <h1 class="add-header">Delete a host</h1>
+
+        {{ form.host_name.label() }}
+        {{ form.host_name() }}
+
+        {{ form.submit(class="btn btn-primary") }}
+
+      </form>
+    </div>
+  </body>
+{% endblock %}
+</html>

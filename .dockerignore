@@ -1,0 +1,49 @@
+# Python Cache & Compiled
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+.virtualenv/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Docker Files (werden nicht ins Image gepackt)
+Dockerfile
+.dockerignore
+docker-compose*.yml
+*.tar
+*.sock
+
+# Logs (werden zur Laufzeit erstellt)
+*.log
+logs/
+
+# Skripte (laut .gitignore)
+skript/
+
+# Build artifacts
+*.egg-info/
+.eggs/
+*.egg

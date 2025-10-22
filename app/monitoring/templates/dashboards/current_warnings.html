@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Problems - CheckMK Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/current_problems.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <h1 class="mb-4">Current Service Warnings</h1>
+        
+        
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <div class="card stats-card border-warning">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Warnings</h5>
+                        <h2 class="display-3 text-warning">{{ warning_count }}</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <a class="click-card" href="{{ url_for('monitor.current_criticals_page') }}">
+                    <div class="card stats-card border-danger click-card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Criticals (Click to see) </h5>
+                            <h2 class="display-3 text-danger">{{ critical_count }}</h2>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <div class="card stats-card border-info click-card">
+                    <a class="click-card" href="{{ url_for('monitor.current_problems_page') }}">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Total Problems (Click to see) </h5>
+                            <h2 class="display-3 text-info">{{ total_count }}</h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <a href="{{ url_for('auth.menu_page') }}" class="btn btn-secondary">Back to Menu</a>
+        </div>
+
+        
+        {% if services %}
+        <div class="card problems-table">
+            <div class="card-header">
+                <h5 class="mb-0">Service Details</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Host</th>
+                                <th>Service</th>
+                                <th>Output</th>
+                                <th>Acknowledge</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for service in services %}
+                            {% set ext = service.get('extensions', {}) %}
+                            {% set state = ext.get('state', 0) %}
+                            {% if state == 1%}
+                            <tr>
+                                <td>
+                                    <span class="badge bg-warning text-dark">WARNING</span>
+                                </td>
+                                <td><strong>{{ ext.get('host_name', '-') }}</strong></td>
+                                <td>{{ ext.get('description', '-') }}</td>
+                                <td><small>{{ ext.get('plugin_output', 'No output') }}</small></td>
+                                <td>
+                                    <a href="{{ url_for('monitor.ack_expire_page', host_name=ext.get('host_name'), service=ext.get('description'), state=state) }}" class="text-decoration-none">
+                                        <span class="badge bg-ack text-dark">ACK?</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="alert alert-success">
+            <h4 class="alert-heading">No warnings detected</h4>
+            <p class="mb-0">All services are running smoothly. No warnings or critical issues found.</p>
+        </div>
+        {% endif %}
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

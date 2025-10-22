@@ -1,0 +1,38 @@
+{% extends 'base_form.html' %}
+
+{% block title %}
+  Acknowledge Problem
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form method="POST" class="form-addHost">
+        {{ form.hidden_tag() }}
+        <h1 class="add-header">Set acknowledge</h1>
+
+        {{ form.host_name.label() }}
+        {{ form.host_name() }}
+
+        {{ form.service.label() }}
+        {{ form.service() }}
+        
+        {{ form.comment.label() }}
+        {{ form.comment() }}
+    
+        <label for="expire_date">Expire date:*</label>
+        <input type="datetime-local" 
+               id="expire_date" 
+               name="expire_date" 
+               required>
+        
+        {{ form.submit(class="btn btn-primary mt-3") }}
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_buttons %}
+<div class="button-wrapper">
+    <h6>Back to problems?</h6>
+    <a class="btn btn-sm btn-secondary" href="{{ url_for('monitor.current_problems_page') }}">Current Problems</a>
+</div>
+{% endblock %}

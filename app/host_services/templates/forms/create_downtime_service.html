@@ -1,0 +1,39 @@
+{% extends 'base_form.html' %}
+
+
+{% block title %}
+  Create Downtime Service
+{% endblock %}
+
+
+
+{% block content %}
+  <body>
+    <div class="container">
+
+      <form method="POST" class="form-addHost">
+         {{ form.hidden_tag() }}
+        <h1 class="add-header">Create downtime for a service</h1>
+
+        {{ form.host_name.label() }}
+        {{ form.host_name() }}
+
+        {{ form.service_name.label() }}
+        {{ form.service_name() }}
+
+        {{ form.downtime_start.label() }}
+        {{ form.downtime_start() }}
+
+        {{ form.downtime_end.label() }}
+        {{ form.downtime_end() }}
+
+        {{ form.comment.label() }}
+        {{ form.comment() }}
+
+        {{ form.submit(class="btn btn-primary") }}
+
+      </form>
+    </div>
+  </body>
+{% endblock %}
+</html>

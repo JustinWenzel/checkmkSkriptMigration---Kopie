@@ -1,0 +1,33 @@
+{% extends 'base_form.html' %}
+
+
+{% block title %}
+  Add Host
+{% endblock %}
+
+
+
+{% block content %}
+  <body>
+    <div class="container">
+
+      <form method="POST" class="form-addHost">
+         {{ form.hidden_tag() }}
+        <h1 class="add-header">Add a new host</h1>
+
+        {{ form.host_name.label() }}
+        {{ form.host_name() }}
+
+        {{ form.ip_address.label() }}
+        {{ form.ip_address() }}
+
+        {{ form.folder_name.label() }}
+        {{ form.folder_name() }}
+
+        {{ form.submit(class="btn btn-primary") }}
+
+      </form>
+    </div>
+  </body>
+{% endblock %}
+</html>

@@ -1,0 +1,33 @@
+{% extends 'base_form.html' %}
+
+
+{% block title %}
+  Update Host
+{% endblock %}
+
+
+
+{% block content %}
+  <body>
+    <div class="container">
+
+      <form method="POST" class="form-addHost">
+         {{ form.hidden_tag() }}
+        <h1 class="add-header">Update a host</h1>
+
+        {{ form.host_name.label() }}
+        {{ form.host_name() }}
+
+        {{ form.ip_address.label() }}
+        {{ form.ip_address() }}
+
+        {{ form.alias.label() }}
+        {{ form.alias() }}
+
+        {{ form.submit(class="btn btn-primary") }}
+
+      </form>
+    </div>
+  </body>
+{% endblock %}
+</html>
