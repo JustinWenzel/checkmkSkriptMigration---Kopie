@@ -13,11 +13,8 @@ def create_app():
 
     from app.models.user import User
     
-    # MySQL Configuration (ersetzt SQLite)
-    app.config["SQLALCHEMY_DATABASE_URI"] = (
-        f"mysql+pymysql://{os.getenv('MYSQL_USER')}:{os.getenv('MYSQL_PASSWORD')}"
-        f"@{os.getenv('MYSQL_HOST')}:{os.getenv('MYSQL_PORT')}/{os.getenv('MYSQL_DATABASE')}"
-    )
+    db_path = os.path.join(app.instance_path, 'models.db')
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.init_app(app)
  
@@ -43,7 +40,7 @@ def create_app():
     app.config["CHECKMK_VERIFY_SSL"] = os.getenv("VERIFY_SSL", "false").lower() == "true"
 
     app.config["SESSION_COOKIE_SECURE"] = True
-    app.config["PERMANENT_SESSION_LIFETIME"] = 1800
+    # app.config["PERMANENT_SESSION_LIFETIME"] = 1800
 
     # Function config 
     from app.auth.routes import auth_bp
