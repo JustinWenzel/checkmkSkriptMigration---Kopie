@@ -34,11 +34,6 @@ def register_error_handlers(app):
         flash("ERROR: Forbidden.", category="danger")
         return _back()
 
-    @app.errorhandler(404)
-    def handle_404(e):
-        flash("ERROR: Not found.", category="danger")
-        return _back()
-
     @app.errorhandler(409)
     def handle_409(e):
         flash("ERROR: Conflict detected.", category="danger")
@@ -60,7 +55,4 @@ def register_error_handlers(app):
         flash("ERROR: Internal server error.", category="danger")
         return _back()
 
-    @app.errorhandler(Exception)
-    def handle_unexpected(e):
-        flash("ERROR: Something went wrong.", category="danger")
-        return _back()
+  

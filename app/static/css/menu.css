@@ -31,7 +31,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.container {
+.menu-container {
   width: 92%;
   max-width: 1200px;
   margin: 48px auto;
@@ -39,14 +39,14 @@ body {
   position: relative;
 }
 
-.logo-block {
+.logo-section {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 64px;
 }
 
-.logo-block img {
+.logo-section img {
   width: 100%;
   max-width: 600px;
   height: auto;
@@ -54,7 +54,51 @@ body {
   border-radius: 20px;
 }
 
-section {
+.logout-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 32px;
+}
+
+.logout-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 12px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: 1px solid var(--cmk-border);
+  background: rgba(47, 53, 60, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--cmk-ink);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logout-button:hover {
+  background: rgba(47, 53, 60, 0.8);
+  border-color: var(--cmk-green);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.logout-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logout-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--cmk-green-glow);
+}
+
+.menu-section {
   margin-bottom: 48px;
   padding: 32px;
   background: var(--cmk-card);
@@ -68,14 +112,14 @@ section {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-section:hover {
+.menu-section:hover {
   transform: translateY(-2px);
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-h2 {
+.section-heading {
   margin: 0 0 28px;
   font-size: 18px;
   font-weight: 700;
@@ -86,7 +130,7 @@ h2 {
   padding-left: 16px;
 }
 
-h2::before {
+.section-heading::before {
   content: "";
   position: absolute;
   left: 0;
@@ -99,17 +143,17 @@ h2::before {
   box-shadow: 0 0 12px var(--cmk-green-glow);
 }
 
-.menu { 
+.menu-list { 
   list-style: none;
   display: grid;
   gap: 12px;
 }
 
-.menu li {
+.menu-list li {
   margin: 0;
 }
 
-.menu a {
+.menu-link {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -126,7 +170,7 @@ h2::before {
   overflow: hidden;
 }
 
-.menu a::before {
+.menu-link::before {
   content: "";
   position: absolute;
   top: 0;
@@ -142,11 +186,11 @@ h2::before {
   transition: left 0.5s ease;
 }
 
-.menu a:hover::before {
+.menu-link:hover::before {
   left: 100%;
 }
 
-.menu a:hover {
+.menu-link:hover {
   background: rgba(47, 53, 60, 0.7);
   border-color: var(--cmk-green);
   transform: translateX(4px);
@@ -155,11 +199,11 @@ h2::before {
     -4px 0 0 0 var(--cmk-green);
 }
 
-.menu a:active {
+.menu-link:active {
   transform: translateX(2px);
 }
 
-.num {
+.menu-number {
   min-width: 36px;
   height: 36px;
   display: flex;
@@ -176,20 +220,20 @@ h2::before {
   transition: box-shadow 0.25s ease;
 }
 
-.menu a:hover .num {
+.menu-link:hover .menu-number {
   box-shadow: 
     0 6px 16px rgba(19, 211, 137, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-.title { 
+.menu-title { 
   flex: 1; 
   font-weight: 600;
   font-size: 16px;
   letter-spacing: 0.01em;
 }
 
-.menu a::after {
+.menu-link::after {
   content: "→";
   color: var(--cmk-muted);
   font-size: 18px;
@@ -198,38 +242,42 @@ h2::before {
   opacity: 0.6;
 }
 
-.menu a:hover::after {
+.menu-link:hover::after {
   color: var(--cmk-green);
   transform: translateX(4px);
   opacity: 1;
 }
 
 @media (max-width: 768px) {
-  .container {
+  .menu-container {
     margin: 24px auto;
   }
   
-  section {
+  .logout-wrapper {
+    margin-bottom: 24px;
+  }
+  
+  .menu-section {
     padding: 24px 20px;
     border-radius: 20px;
   }
   
-  .logo-block {
+  .logo-section {
     margin-bottom: 48px;
   }
   
-  .logo-block img {
+  .logo-section img {
     max-width: 480px;
     border-radius: 16px;
   }
   
-  .menu a {
+  .menu-link {
     padding: 16px 18px;
   }
 }
 
 /* Keep menu links free of default underlines but provide a visible focus ring for keyboard users */
-.menu a:focus-visible {
+.menu-link:focus-visible {
   outline: none;
   box-shadow: 0 0 0 4px rgba(19, 211, 137, 0.12);
   border-radius: 12px;

@@ -1,5 +1,5 @@
 from flask import render_template, url_for, flash, redirect, Blueprint
-from flask_login import login_user, login_required
+from flask_login import login_user, login_required, logout_user
 from app.auth.forms import LoginForm, ResetPasswordForm
 from app.models.user import User
 from . import auth_bp
@@ -37,4 +37,10 @@ def reset_password_page():
 @login_required
 def menu_page():
     return render_template("menu.html")  # app/templates/menu.html (global)
+
+@auth_bp.route("/logout")
+@login_required
+def logout_page():
+    logout_user()
+    return redirect(url_for("auth.login_page"))
 

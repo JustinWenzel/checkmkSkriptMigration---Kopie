@@ -20,14 +20,16 @@ dropdown.addEventListener("change", function() {
     startRefreshTimer(seconds);
 });
 
+
 function startRefreshTimer(seconds) {
     
+    // Stop old timer otherwise it would run in background (setInterval, clearInterval)
     if (refreshTimer) {
         clearInterval(refreshTimer);
         refreshTimer = null;
     }
     
-    
+    //Reload will be executed every time interval is reached
     if (seconds > 0) {
         refreshTimer = setInterval(function() {
             location.reload();

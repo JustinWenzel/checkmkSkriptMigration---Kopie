@@ -7,36 +7,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
-    <div class="container">
+    <div class="menu-container">
 
-      
-      <div class="logo-block shadow">
+      <div class="logo-section">
         <img src="/static/images/checkmk-logo-white-on-green.png" alt="Checkmk Logo">
       </div>
 
-      <section>
-        <h2>Current problems</h2>
-        <ul class="menu">
-          <li><a href="{{ url_for('monitor.current_problems_page')}}"><span class="num">1</span><span class="title">Show current problems</span></a></li>
-          <li><a href="{{ url_for('monitor.show_all_downtimes_page')}}"><span class="num">2</span><span class="title">Show all downtimes</span></a></li>
+      <div class="logout-wrapper">
+          <a class="logout-button" href="{{ url_for('auth.logout_page') }}">Logout</a>
+      </div>
+
+      <section class="menu-section">
+        <h2 class="section-heading">Current problems</h2>
+        <ul class="menu-list">
+          <li><a class="menu-link" href="{{ url_for('monitor.current_problems_page')}}"><span class="menu-number">1</span><span class="menu-title">Show current problems</span></a></li>
+          <li><a class="menu-link" href="{{ url_for('monitor.show_all_downtimes_page')}}"><span class="menu-number">2</span><span class="menu-title">Show all downtimes</span></a></li>
         </ul>
       </section>
 
-      <section>
-        <h2>HOST</h2>
-        <ul class="menu">
-          <li><a href="{{ url_for('hosts.addhost_page') }}"><span class="num">1</span><span class="title">Create Host</span></a></li>
-          <li><a href="{{ url_for('hosts.deletehost_page')}}"><span class="num">2</span><span class="title">Delete Host</span></a></li>
-          <li><a href="{{ url_for('hosts.showhost_page')}}"><span class="num">3</span><span class="title">Show Host</span></a></li>
-          <li><a href="{{ url_for('hosts.updatehost_page')}}"><span class="num">4</span><span class="title">Update Host</span></a></li>
-          <li><a href="{{ url_for('hosts.create_host_downtime_page')}}"><span class="num">5</span><span class="title">Create downtime for host</span></a></li>
+      <section class="menu-section">
+        <h2 class="section-heading">HOST</h2>
+        <ul class="menu-list">
+          <li><a class="menu-link" href="{{ url_for('hosts.addhost_page') }}"><span class="menu-number">1</span><span class="menu-title">Create Host</span></a></li>
+          <li><a class="menu-link" href="{{ url_for('hosts.deletehost_page')}}"><span class="menu-number">2</span><span class="menu-title">Delete Host</span></a></li>
+          <li><a class="menu-link" href="{{ url_for('hosts.showhost_page')}}"><span class="menu-number">3</span><span class="menu-title">Show Host</span></a></li>
+          <li><a class="menu-link" href="{{ url_for('hosts.updatehost_page')}}"><span class="menu-number">4</span><span class="menu-title">Update Host</span></a></li>
+          <li><a class="menu-link" href="{{ url_for('hosts.create_host_downtime_page')}}"><span class="menu-number">5</span><span class="menu-title">Create downtime for host</span></a></li>
         </ul>
       </section>
 
-      <section>
-        <h2>SERVICE</h2>
-        <ul class="menu">
-          <li><a href="{{ url_for('host_services.create_service_downtime_page')}}"><span class="num">2</span><span class="title">Create downtime for service</span></a></li>
+      <section class="menu-section">
+        <h2 class="section-heading">SERVICE</h2>
+        <ul class="menu-list">
+          <li><a class="menu-link" href="{{ url_for('host_services.create_service_downtime_page')}}"><span class="menu-number">2</span><span class="menu-title">Create downtime for service</span></a></li>
         </ul>
       </section>
 
