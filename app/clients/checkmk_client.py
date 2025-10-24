@@ -282,63 +282,127 @@ class CheckmkClient:
         abort(resp.status_code)        
 
 
-    def get_current_problems(self):
+    def get_current_problems(self, is_netops=None):
         url = f"{self.base_url}/domain-types/service/collections/all"
 
-        
-        service_query = {
-        "op": "and",
-        "expr": [
-            {
-                "op": "or",
-                "expr": [
-                    {"op": "=", "left": "state", "right": "1"},
-                    {"op": "=", "left": "state", "right": "2"}
-                ]
-            },
-            {"op": "=", "left": "acknowledged", "right": "0"},
-            {"op": "=", "left": "scheduled_downtime_depth", "right": "0"},
-            {"op": "=", "left": "host_scheduled_downtime_depth", "right": "0"},
-            {"op": "=", "left": "host_state", "right": "0"}
-        ]
-    }
-        
-        service_columns = [
-            "host_name",
-            "host_state",
-            "description",
-            "state",
-            "state_type",
-            "acknowledged",
-            "scheduled_downtime_depth",
-            "host_scheduled_downtime_depth",
-            "plugin_output",
-            "last_check"
-        ]
-
-        params = {
-            "columns": service_columns,
-            "query": json.dumps(service_query)
+        if is_netops:
+                service_query = {
+            "op": "and",
+            "expr": [
+                {
+                    "op": "or",
+                    "expr": [
+                        {"op": "=", "left": "state", "right": "1"},
+                        {"op": "=", "left": "state", "right": "2"}
+                    ]
+                },
+                {"op": "=", "left": "acknowledged", "right": "0"},
+                {"op": "=", "left": "scheduled_downtime_depth", "right": "0"},
+                {"op": "=", "left": "host_scheduled_downtime_depth", "right": "0"},
+                {"op": "=", "left": "host_state", "right": "0"}
+            ]
         }
+            
+                service_columns = [
+                "host_name",
+                "host_state",
+                "host_labels",
+                "description",
+                "state",
+                "state_type",
+                "acknowledged",
+                "scheduled_downtime_depth",
+                "host_scheduled_downtime_depth",
+                "plugin_output",
+                "last_check"
+            ]
 
-        headers = {
-            "Accept": "application/json"
+                params = {
+                "columns": service_columns,
+                "query": json.dumps(service_query)
+            }
+
+                headers = {
+                "Accept": "application/json"
+            }
+
+                try:
+                    resp = requests.get(url, params=params, headers=headers, auth=self.auth, verify=self.verify_ssl)
+                except requests.Timeout:
+                    abort(504)
+                except requests.RequestException:
+                    abort(503)
+                
+                if resp.status_code >= 200 and resp.status_code <= 299:
+                    result = resp.json()
+                    
+                    # Filter Host labels with "permission:netops"
+                    if "value" in result:
+                        filtered_services = [
+                            service for service in result["value"]
+                            if service.get("extensions", {}).get("host_labels", {}).get("permission") == "netops"
+                        ]
+                        result["value"] = filtered_services
+                    
+                    return result
+                
+                abort(resp.status_code)
+
+
+        else:
+            service_query = {
+            "op": "and",
+            "expr": [
+                {
+                    "op": "or",
+                    "expr": [
+                        {"op": "=", "left": "state", "right": "1"},
+                        {"op": "=", "left": "state", "right": "2"}
+                    ]
+                },
+                {"op": "=", "left": "acknowledged", "right": "0"},
+                {"op": "=", "left": "scheduled_downtime_depth", "right": "0"},
+                {"op": "=", "left": "host_scheduled_downtime_depth", "right": "0"},
+                {"op": "=", "left": "host_state", "right": "0"}
+            ]
         }
+            
+            service_columns = [
+                "host_name",
+                "host_state",
+                "description",
+                "state",
+                "state_type",
+                "acknowledged",
+                "scheduled_downtime_depth",
+                "host_scheduled_downtime_depth",
+                "plugin_output",
+                "last_check"
+            ]
 
-        try:
-            resp = requests.get(url, params=params, headers=headers, auth=self.auth, verify=self.verify_ssl)
-        except requests.Timeout:
-            abort(504)
-        except requests.RequestException:
-            abort(503)
-        
-        if resp.status_code >= 200 and resp.status_code <=299:
-            return resp.json()
-        
-        abort(resp.status_code)
+            params = {
+                "columns": service_columns,
+                "query": json.dumps(service_query)
+            }
+
+            headers = {
+                "Accept": "application/json"
+            }
+
+            try:
+                resp = requests.get(url, params=params, headers=headers, auth=self.auth, verify=self.verify_ssl)
+            except requests.Timeout:
+                abort(504)
+            except requests.RequestException:
+                abort(503)
+            
+            if resp.status_code >= 200 and resp.status_code <=299:
+                return resp.json()
+            
+            abort(resp.status_code)
 
 
-
+'''
     def get_current_problems_is_netops(self):
         url = f"{self.base_url}/domain-types/service/collections/all"
 
@@ -404,3 +468,4 @@ class CheckmkClient:
             return result
         
         abort(resp.status_code)
+'''

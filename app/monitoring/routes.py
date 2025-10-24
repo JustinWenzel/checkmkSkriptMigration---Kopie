@@ -14,11 +14,11 @@ def get_checkmk_client():
     )
 
 
-@monitor_bp.route("/currentproblems", methods=["GET"])
+@monitor_bp.route("/currentproblems/<is_netops>", methods=["GET"])
 @login_required
-def current_problems_page():
+def current_problems_page(is_netops):
     client = get_checkmk_client()
-    service_data = client.get_current_problems()
+    service_data = client.get_current_problems(is_netops)
     
     services = []
     warning_count = 0
@@ -42,34 +42,6 @@ def current_problems_page():
         total_count=len(services)
     )
 
-
-@monitor_bp.route("/currentproblemsnetops", methods=["GET"])
-@login_required
-def current_problems_is_netops_page():
-    client = get_checkmk_client()
-    service_data = client.get_current_problems_is_netops()
-    
-    services = []
-    warning_count = 0
-    critical_count = 0
-    
-    if service_data and 'value' in service_data:
-        services = service_data['value']
-        
-        for service in services:
-            state = service.get('extensions', {}).get('state')
-            if state == 1:
-                warning_count += 1
-            elif state == 2:
-                critical_count += 1
-    
-    return render_template(
-        "dashboards/current_problems_is_netops.html",  
-        services=services,
-        warning_count=warning_count,
-        critical_count=critical_count,
-        total_count=len(services)
-    )
 
 
 @monitor_bp.route("/currentwarnings", methods=["GET"])

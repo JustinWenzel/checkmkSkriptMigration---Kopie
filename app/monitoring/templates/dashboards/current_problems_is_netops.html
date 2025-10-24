@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container-fluid py-4">
-        <h1 class="mb-4">Current Service Problems</h1>
+        <h1 class="mb-4">Current Service Problems - Netops only</h1>
         
         
         <div class="row g-3 mb-4">
@@ -45,6 +45,9 @@
 
         <div class="refresh-controls">
             <a href="{{ url_for('auth.menu_page') }}" class="btn btn-secondary">Back to Menu</a>
+
+            <a href="{{ url_for('monitor.current_problems_page') }}" class="btn btn-secondary">All problems</a>
+
             
             <div class="refresh-controls-right">
                 <select id="refreshSelect" class="refresh-select">
