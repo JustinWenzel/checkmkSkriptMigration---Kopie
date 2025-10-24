@@ -14,11 +14,25 @@ def get_checkmk_client():
     )
 
 
+@monitor_bp.route("/currentproblems", methods=["GET"])
 @monitor_bp.route("/currentproblems/<is_netops>", methods=["GET"])
 @login_required
-def current_problems_page(is_netops):
+def current_problems_page(is_netops=None):
+    
     client = get_checkmk_client()
-    service_data = client.get_current_problems(is_netops)
+    
+
+    if is_netops is None or is_netops == 'false':
+        netops_filter = False
+        template = "dashboards/current_problems.html"
+    elif is_netops == 'true' or is_netops is True:
+        netops_filter = True
+        template = "dashboards/current_problems_is_netops.html"
+    else:
+        netops_filter = False
+        template = "dashboards/current_problems.html"
+    
+    service_data = client.get_current_problems(is_netops=netops_filter)
     
     services = []
     warning_count = 0
@@ -35,20 +49,33 @@ def current_problems_page(is_netops):
                 critical_count += 1
     
     return render_template(
-        "dashboards/current_problems.html",  
+        template,
         services=services,
         warning_count=warning_count,
         critical_count=critical_count,
-        total_count=len(services)
+        total_count=len(services),
     )
 
 
 
 @monitor_bp.route("/currentwarnings", methods=["GET"])
+@monitor_bp.route("/currentwarnings/<is_netops>", methods=["GET"])
 @login_required
-def current_warnings_page():
+def current_warnings_page(is_netops=None):
     client = get_checkmk_client()
-    service_data = client.get_current_problems()
+
+
+    if is_netops is None or is_netops == 'false':
+        netops_filter = False
+        template = "dashboards/current_warnings.html"
+    elif is_netops == 'true' or is_netops is True:
+        netops_filter = True
+        template = "dashboards/current_warnings_is_netops.html"
+    else:
+        netops_filter = False
+        template = "dashboards/current_warnings.html"
+    
+    service_data = client.get_current_problems(is_netops=netops_filter)
     
     services = []
     warning_count = 0
@@ -65,7 +92,7 @@ def current_warnings_page():
                 critical_count += 1
     
     return render_template(
-        "dashboards/current_warnings.html",  
+        template,  
         services=services,
         warning_count=warning_count,
         critical_count=critical_count,
@@ -74,10 +101,22 @@ def current_warnings_page():
 
 
 @monitor_bp.route("/currentcriticals", methods=["GET"])
+@monitor_bp.route("/currentcriticals/<is_netops>", methods=["GET"])
 @login_required
-def current_criticals_page():
+def current_criticals_page(is_netops=None):
     client = get_checkmk_client()
-    service_data = client.get_current_problems()
+
+    if is_netops is None or is_netops == 'false':
+        netops_filter = False
+        template = "dashboards/current_criticals.html"
+    elif is_netops == 'true' or is_netops is True:
+        netops_filter = True
+        template = "dashboards/current_criticals_is_netops.html"
+    else:
+        netops_filter = False
+        template = "dashboards/current_criticals.html"
+    
+    service_data = client.get_current_problems(is_netops=netops_filter)
     
     services = []
     warning_count = 0
@@ -94,7 +133,7 @@ def current_criticals_page():
                 critical_count += 1
     
     return render_template(
-        "dashboards/current_criticals.html",  
+        template,  
         services=services,
         warning_count=warning_count,
         critical_count=critical_count,
