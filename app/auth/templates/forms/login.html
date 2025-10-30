@@ -34,8 +34,12 @@
     </div>
 
     <div class="back-to-menu">
-        <h6>Forgot password?</h6>
-        <a class="btn btn-sm btn-secondary" href="{{ url_for('auth.reset_password_page') }}">Reset password</a>
+        <div class="button-group">
+            <div class="button-wrapper">
+                <h6>Forgot password?</h6>
+                <a class="btn btn-sm btn-secondary" href="{{ url_for('auth.reset_password_page') }}">Reset password</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>

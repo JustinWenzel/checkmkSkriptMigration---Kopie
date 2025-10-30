@@ -14,6 +14,7 @@
       </div>
 
       <div class="logout-wrapper">
+          <a class="logout-button" href="{{ url_for('auth.register_page') }}">Register a new user</a>
           <a class="logout-button" href="{{ url_for('auth.logout_page') }}">Logout</a>
       </div>
 
@@ -21,7 +22,8 @@
         <h2 class="section-heading">Current problems</h2>
         <ul class="menu-list">
           <li><a class="menu-link" href="{{ url_for('monitor.current_problems_page')}}"><span class="menu-number">1</span><span class="menu-title">Show current problems</span></a></li>
-          <li><a class="menu-link" href="{{ url_for('monitor.show_all_downtimes_page')}}"><span class="menu-number">2</span><span class="menu-title">Show all downtimes</span></a></li>
+          <li><a class="menu-link" href="{{ url_for('monitor.current_problems_page', is_netops='true')}}"><span class="menu-number">2</span><span class="menu-title">Show current problems - Netops</span></a></li>
+          <li><a class="menu-link" href="{{ url_for('monitor.show_all_downtimes_page')}}"><span class="menu-number">3</span><span class="menu-title">Show all downtimes</span></a></li>
         </ul>
       </section>
 
@@ -39,7 +41,7 @@
       <section class="menu-section">
         <h2 class="section-heading">SERVICE</h2>
         <ul class="menu-list">
-          <li><a class="menu-link" href="{{ url_for('host_services.create_service_downtime_page')}}"><span class="menu-number">2</span><span class="menu-title">Create downtime for service</span></a></li>
+          <li><a class="menu-link" href="{{ url_for('host_services.create_service_downtime_page')}}"><span class="menu-number">1</span><span class="menu-title">Create downtime for service</span></a></li>
         </ul>
       </section>
 

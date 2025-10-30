@@ -6,7 +6,7 @@ from flask import abort
 
 class CheckmkClient:  
     def __init__(self, base_url, username, password, verify_ssl=True, timeout_s=10):
-        self.base_url = base_url.rstrip("/")
+        self.base_url = base_url.strip("/")
         self.auth = (username, password)
         self.verify_ssl = verify_ssl
         self.timeout_s = timeout_s
@@ -319,7 +319,7 @@ class CheckmkClient:
         ]
         
         
-        if is_netops:
+        if is_netops == True or is_netops == False:
             service_columns.append("host_labels")
 
         params = {
@@ -350,12 +350,16 @@ class CheckmkClient:
             result = resp.json()  
             
             
-            if is_netops and "value" in result:
+            if is_netops == True and "value" in result:
                 result["value"] = [
                     service for service in result["value"]
                     if service.get("extensions", {}).get("host_labels", {}).get("permission") == "netops"
                 ]
-            
+            elif is_netops == False and 'value' in result:
+                result["value"] = [
+                    service for service in result["value"]
+                    if service.get("extensions", {}).get("host_labels", {}).get("permission") != "netops"
+                ]
             return result
         
         

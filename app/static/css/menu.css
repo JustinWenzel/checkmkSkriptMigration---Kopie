@@ -57,6 +57,8 @@ body {
 .logout-wrapper {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 32px;
 }
 
@@ -255,6 +257,12 @@ body {
   
   .logout-wrapper {
     margin-bottom: 24px;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .logout-button {
+    width: 100%;
   }
   
   .menu-section {

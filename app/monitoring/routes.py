@@ -22,14 +22,13 @@ def current_problems_page(is_netops=None):
     client = get_checkmk_client()
     
 
-    if is_netops is None or is_netops == 'false':
+    if is_netops == 'false' or is_netops == False:
         netops_filter = False
-        template = "dashboards/current_problems.html"
+        template = "dashboards/current_problems_not_netops.html"
     elif is_netops == 'true' or is_netops is True:
         netops_filter = True
         template = "dashboards/current_problems_is_netops.html"
     else:
-        netops_filter = False
         template = "dashboards/current_problems.html"
     
     service_data = client.get_current_problems(is_netops=netops_filter)
@@ -142,8 +141,9 @@ def current_criticals_page(is_netops=None):
 
 
 @monitor_bp.route('/ackexpire/<host_name>/<service>/<state>', methods=["GET", "POST"])
+@monitor_bp.route('/ackexpire/<host_name>/<service>/<state>/<is_netops>', methods=["GET", "POST"])
 @login_required
-def ack_expire_page(host_name, service, state):
+def ack_expire_page(host_name, service, state, is_netops=None):
     form = AckExpireForm()
     
     if not form.is_submitted():
@@ -163,12 +163,12 @@ def ack_expire_page(host_name, service, state):
             form.comment.data
         )
         
-        
+        # Redirect based on state and netops filter
         if state == "1":
-            return redirect(url_for('monitor.current_warnings_page'))
+            return redirect(url_for('monitor.current_warnings_page', is_netops=is_netops))
         elif state == "2": 
-            return redirect(url_for('monitor.current_criticals_page'))
-        return redirect(url_for('monitor.current_problems_page'))
+            return redirect(url_for('monitor.current_criticals_page', is_netops=is_netops))
+        return redirect(url_for('monitor.current_problems_page', is_netops=is_netops))
          
     return render_template("forms/acknowledge.html", form=form)
 

@@ -1,0 +1,75 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/form.css">
+    <title>Register</title>
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <div class="container">
+        <form method="POST" class="form-addHost">
+            {{ form.hidden_tag() }}
+            <h1 class="add-header">Create New Account</h1>
+            
+            {{ form.username.label() }}
+            {{ form.username() }}
+            {% if form.username.errors %}
+                {% for error in form.username.errors %}
+                    <div class="alert alert-danger" style="margin-top: -15px; margin-bottom: 10px; padding: 8px 12px; font-size: 13px;">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
+            {{ form.email_address.label() }}
+            {{ form.email_address() }}
+            {% if form.email_address.errors %}
+                {% for error in form.email_address.errors %}
+                    <div class="alert alert-danger" style="margin-top: -15px; margin-bottom: 10px; padding: 8px 12px; font-size: 13px;">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
+            {{ form.password.label() }}
+            {{ form.password() }}
+            {% if form.password.errors %}
+                {% for error in form.password.errors %}
+                    <div class="alert alert-danger" style="margin-top: -15px; margin-bottom: 10px; padding: 8px 12px; font-size: 13px;">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
+            {{ form.confirm_password.label() }}
+            {{ form.confirm_password() }}
+            {% if form.confirm_password.errors %}
+                {% for error in form.confirm_password.errors %}
+                    <div class="alert alert-danger" style="margin-top: -15px; margin-bottom: 10px; padding: 8px 12px; font-size: 13px;">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
+    </div>
+
+    <div class="back-to-menu">
+        <h6>Back to menu?</h6>
+        <a class="btn btn-sm btn-secondary" href="{{ url_for('auth.menu_page') }}"> Menu</a>
+    </div>
+</body>
+</html>

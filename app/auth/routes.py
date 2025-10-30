@@ -1,7 +1,8 @@
 from flask import render_template, url_for, flash, redirect, Blueprint
 from flask_login import login_user, login_required, logout_user
-from app.auth.forms import LoginForm, ResetPasswordForm
+from app.auth.forms import LoginForm, ResetPasswordForm, RegisterForm
 from app.models.user import User
+from app.models import db
 from . import auth_bp
 
 @auth_bp.route("/", methods=["GET", "POST"])
@@ -15,6 +16,30 @@ def login_page():
             return redirect(url_for("auth.menu_page"))
         flash("Invalid username or password. In case of problems reach to JustinSven.Wenzel@gls-germany.com.", "danger")
     return render_template("forms/login.html", form=form)  # app/auth/templates/forms/login.html
+
+
+@auth_bp.route("/register", methods=["GET", "POST"])
+@login_required
+def register_page():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        new_user = User(
+            username=form.username.data.strip(),
+            email_address=form.email_address.data.strip()
+        )
+
+        new_user.set_password(form.password.data.strip())
+        
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+            flash(f"Account created successfully for {new_user.username}! You can now log in.", "success")
+            return redirect(url_for("auth.register_page"))
+        except Exception as e:
+            db.session.rollback()
+            flash("An error occurred during registration. Please try again.", "danger")
+    
+    return render_template("forms/register.html", form=form)
 
 
 @auth_bp.route("/resetpassword", methods=["GET", "POST"])

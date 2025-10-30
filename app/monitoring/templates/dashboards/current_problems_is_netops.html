@@ -48,6 +48,8 @@
 
             <a href="{{ url_for('monitor.current_problems_page') }}" class="btn btn-secondary">All problems</a>
 
+            <a href="{{ url_for('monitor.current_problems_page', is_netops='false') }}" class="btn btn-secondary">Without netops</a>
+
             
             <div class="refresh-controls-right">
                 <select id="refreshSelect" class="refresh-select">
@@ -99,7 +101,7 @@
                                 <td>{{ ext.get('description', '-') }}</td>
                                 <td><small>{{ ext.get('plugin_output', 'No output') }}</small></td>
                                 <td>
-                                    <a href="{{ url_for('monitor.ack_expire_page', host_name=ext.get('host_name'), service=ext.get('description'), state=0) }}" class="text-decoration-none">
+                                    <a href="{{ url_for('monitor.ack_expire_page', host_name=ext.get('host_name'), service=ext.get('description'), state=0, is_netops='true') }}" class="text-decoration-none">
                                         <span class="badge bg-ack text-dark">ACK?</span>
                                     </a>
                                 </td>

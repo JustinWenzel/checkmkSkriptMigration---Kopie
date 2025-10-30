@@ -92,7 +92,7 @@
                                 <td>{{ ext.get('description', '-') }}</td>
                                 <td><small>{{ ext.get('plugin_output', 'No output') }}</small></td>
                                 <td>
-                                    <a href="{{ url_for('monitor.ack_expire_page', host_name=ext.get('host_name'), service=ext.get('description'), state=state) }}" class="text-decoration-none">
+                                    <a href="{{ url_for('monitor.ack_expire_page', host_name=ext.get('host_name'), service=ext.get('description'), state=state, is_netops='true') }}" class="text-decoration-none">
                                         <span class="badge bg-ack text-dark">ACK?</span>
                                     </a>
                                 </td>
