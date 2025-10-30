@@ -29,6 +29,7 @@ def current_problems_page(is_netops=None):
         netops_filter = True
         template = "dashboards/current_problems_is_netops.html"
     else:
+        netops_filter = None
         template = "dashboards/current_problems.html"
     
     service_data = client.get_current_problems(is_netops=netops_filter)
@@ -64,14 +65,14 @@ def current_warnings_page(is_netops=None):
     client = get_checkmk_client()
 
 
-    if is_netops is None or is_netops == 'false':
+    if is_netops == 'false' or is_netops == False:
         netops_filter = False
-        template = "dashboards/current_warnings.html"
+        template = "dashboards/current_warnings_not_netops.html"
     elif is_netops == 'true' or is_netops is True:
         netops_filter = True
         template = "dashboards/current_warnings_is_netops.html"
     else:
-        netops_filter = False
+        netops_filter = None
         template = "dashboards/current_warnings.html"
     
     service_data = client.get_current_problems(is_netops=netops_filter)
@@ -105,14 +106,14 @@ def current_warnings_page(is_netops=None):
 def current_criticals_page(is_netops=None):
     client = get_checkmk_client()
 
-    if is_netops is None or is_netops == 'false':
+    if is_netops == 'false' or is_netops == False:
         netops_filter = False
-        template = "dashboards/current_criticals.html"
+        template = "dashboards/current_criticals_not_netops.html"
     elif is_netops == 'true' or is_netops is True:
         netops_filter = True
         template = "dashboards/current_criticals_is_netops.html"
     else:
-        netops_filter = False
+        netops_filter = None
         template = "dashboards/current_criticals.html"
     
     service_data = client.get_current_problems(is_netops=netops_filter)

@@ -49,6 +49,8 @@
             
             <a href="{{ url_for('monitor.current_criticals_page', is_netops='true') }}" class="btn btn-secondary">Netops only</a>
 
+            <a href="{{ url_for('monitor.current_criticals_page', is_netops='false') }}" class="btn btn-secondary">Without netops</a>
+
             <div class="refresh-controls-right">
                 <select id="refreshSelect" class="refresh-select">
                     <option value="0">no auto refresh</option>

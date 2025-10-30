@@ -15,7 +15,7 @@
         <div class="row g-3 mb-4">
             <div class="col-md-4">
                 <div class="card stats-card border-warning click-card">
-                    <a class="click-card" href="{{ url_for('monitor.current_warnings_page', is_netops='true') }}">
+                    <a class="click-card" href="{{ url_for('monitor.current_warnings_page', is_netops='false') }}">
                         <div class="card-body text-center">
                             <h5 class="card-title">Warnings without Netops (Click to see)</h5>
                             <h2 class="display-3 text-warning">{{ warning_count }}</h2>
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <a class="click-card" href="{{ url_for('monitor.current_criticals_page', is_netops='true')}}">
+                <a class="click-card" href="{{ url_for('monitor.current_criticals_page', is_netops='false')}}">
                     <div class="card stats-card border-danger click-card">
                         <div class="card-body text-center">
                             <h5 class="card-title">Criticals without Netops(Click to see) </h5>

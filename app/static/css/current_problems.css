@@ -255,16 +255,24 @@ a.click-card:focus > .card.border-info,
 
 .refresh-controls {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 0.5rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+/* Alle direkten Links (außer innerhalb von .refresh-controls-right) nebeneinander */
+.refresh-controls > a.btn {
+  flex: 0 0 auto;
 }
 
 .refresh-controls-right {
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  margin-left: auto;
 }
 
 .refresh-select {
@@ -321,11 +329,15 @@ a.click-card:focus > .card.border-info,
   .refresh-controls {
     flex-direction: column;
     align-items: stretch;
-    gap: 0.5rem;
+  }
+
+  .refresh-controls > a.btn {
+    width: 100%;
   }
 
   .refresh-controls-right {
-    justify-content: stretch;
+    width: 100%;
+    margin-left: 0;
   }
 
   .refresh-select {
