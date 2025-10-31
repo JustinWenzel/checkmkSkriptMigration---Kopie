@@ -47,9 +47,11 @@
         <div class="refresh-controls">
             <a href="{{ url_for('auth.menu_page') }}" class="btn btn-secondary">Back to Menu</a>
             
-            <a href="{{ url_for('monitor.current_criticals_page') }}" class="btn btn-secondary">All criticals</a>
-
-            <a href="{{ url_for('monitor.current_criticals_page', is_netops='true') }}" class="btn btn-secondary">Netops only</a>
+            <div class="filter-buttons">
+                <a href="{{ url_for('monitor.current_criticals_page') }}" class="btn btn-filter">All Criticals</a>
+                <span class="btn btn-filter btn-filter-active">Without Netops</span>
+                <a href="{{ url_for('monitor.current_criticals_page', is_netops='true') }}" class="btn btn-filter">Only Netops</a>
+            </div>
 
             <div class="refresh-controls-right">
                 <select id="refreshSelect" class="refresh-select">

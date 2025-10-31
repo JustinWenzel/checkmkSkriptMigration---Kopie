@@ -10,7 +10,9 @@
     <div class="menu-container">
 
       <div class="logo-section">
+        <a href="https://www.google.com/logos/2010/pacman10-i.html">
         <img src="/static/images/checkmk-logo-white-on-green.png" alt="Checkmk Logo">
+        </a>
       </div>
 
       <div class="logout-wrapper">
@@ -23,7 +25,7 @@
         <ul class="menu-list">
           <li><a class="menu-link" href="{{ url_for('monitor.current_problems_page', is_netops='default')}}"><span class="menu-number">1</span><span class="menu-title">Show current problems</span></a></li>
           <li><a class="menu-link" href="{{ url_for('monitor.current_problems_page', is_netops='true')}}"><span class="menu-number">2</span><span class="menu-title">Show current problems - Netops</span></a></li>
-          <li><a class="menu-link" href="{{ url_for('monitor.current_problems_page', is_netops='false')}}"><span class="menu-number">2</span><span class="menu-title">Show current problems - Without Netops</span></a></li>
+          <li><a class="menu-link" href="{{ url_for('monitor.current_problems_page', is_netops='false')}}"><span class="menu-number">3</span><span class="menu-title">Show current problems - Without Netops</span></a></li>
           <li><a class="menu-link" href="{{ url_for('monitor.show_all_downtimes_page')}}"><span class="menu-number">3</span><span class="menu-title">Show all downtimes</span></a></li>
         </ul>
       </section>

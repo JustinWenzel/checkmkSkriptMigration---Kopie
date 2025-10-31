@@ -27,7 +27,7 @@
                 <a class="click-card" href="{{ url_for('monitor.current_criticals_page', is_netops='false')}}">
                     <div class="card stats-card border-danger click-card">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Criticals without Netops(Click to see) </h5>
+                            <h5 class="card-title">Criticals without Netops (Click to see) </h5>
                             <h2 class="display-3 text-danger">{{ critical_count }}</h2>
                         </div>
                     </div>
@@ -46,9 +46,11 @@
         <div class="refresh-controls">
             <a href="{{ url_for('auth.menu_page') }}" class="btn btn-secondary">Back to Menu</a>
 
-            <a href="{{ url_for('monitor.current_problems_page') }}" class="btn btn-secondary">All problems</a>
-
-            <a href="{{ url_for('monitor.current_problems_page', is_netops='true') }}" class="btn btn-secondary">Netops only</a>
+            <div class="filter-buttons">
+                <a href="{{ url_for('monitor.current_problems_page') }}" class="btn btn-filter">All Problems</a>
+                <span class="btn btn-filter btn-filter-active">Without Netops</span>
+                <a href="{{ url_for('monitor.current_problems_page', is_netops='true') }}" class="btn btn-filter">Only Netops</a>
+            </div>
 
             
             <div class="refresh-controls-right">
